@@ -2,15 +2,13 @@ import firebase from 'firebase/compat/app'
 import 'firebase/compat/firestore'
 
 firebase.initializeApp({
-  apiKey: "AIzaSyDPcFBM2j_IqHxpReaEmyJsufy0j189G3E",
-  authDomain: "nosql-folders.firebaseapp.com",
-  databaseURL:
-    "https://nosql-folders-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "nosql-folders",
-  storageBucket: "nosql-folders.appspot.com",
-  messagingSenderId: "370984351664",
-  appId: "1:370984351664:web:e4b12f51bd4eb99f024875",
-  measurementId: "G-040CQ7PLVG",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 });
 
 const db = firebase.firestore();
