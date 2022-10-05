@@ -4,7 +4,7 @@ type FolderProps = {
   title: string;
 };
 
-const Folder: React.FunctionComponent<FolderProps> = ({ title }) => {
+const File: React.FunctionComponent<FolderProps> = ({ title }) => {
 
   return (
     <>
@@ -18,4 +18,4 @@ const Folder: React.FunctionComponent<FolderProps> = ({ title }) => {
   );
 };
 
-export default Folder;
+export default File;

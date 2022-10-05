@@ -13,31 +13,22 @@ type ContactListProps = {
 const FolderGrid: React.FunctionComponent<ContactListProps> = ({ parent }) => {
   const [folders, isPending, error] = useFetch(parent);
 
+  const [foldersName, setFoldersName] = useState([{}]);
 
-  // get all documents name from the collection "folders"
-    const [foldersName, setFoldersName] = useState({});
-    useEffect(() => {
-        const unsubscribe = firebase.db.collection("folders").onSnapshot((snapshot) => {
-            const foldersName = snapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data(),
-            }));
-            setFoldersName(foldersName);
-        });
-        return () => unsubscribe();
-    }, []);
+  useEffect(() => {
+    const unsubscribe = firebase.db
+      .collection("folders")
+      .onSnapshot((snapshot) => {
+        const foldersName = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setFoldersName(foldersName);
+      });
+    return () => unsubscribe();
+  }, [parent]);
 
-
-  console.log(foldersName)
-
-//   useEffect(() => {
-//     if (parent) {
-//       const a = firebase
-//         .firestore()
-//         .collection("folders")
-//         .where("parent", "==", false);
-//     }
-//   }, [parent]);
+  console.log(foldersName);
 
   return (
     <>
@@ -48,10 +39,10 @@ const FolderGrid: React.FunctionComponent<ContactListProps> = ({ parent }) => {
           </div>
         )}
         {isPending && <div>Loading...</div>}
-        {folders &&
-          folders.map((folder: { id: number; title: string }) => (
+        {foldersName &&
+          foldersName.map((folder: any) => (
             <div className="py-4" key={folder.id}>
-              <Folder title={folder.title} />
+              <Folder title={folder.title} id={folder.id}/>
             </div>
           ))}
       </div>

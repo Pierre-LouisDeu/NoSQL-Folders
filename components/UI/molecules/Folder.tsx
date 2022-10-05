@@ -1,19 +1,19 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
+import Link from "next/link";
 
 type FolderProps = {
   title: string;
+  id: string;
 };
 
-const Folder: React.FunctionComponent<FolderProps> = ({ title }) => {
-
+const Folder: React.FunctionComponent<FolderProps> = ({ title, id }) => {
   return (
     <>
-      <a
-        href=""
-        className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-      >
-        <h1 className="text-2xl font-bold">{title} &rarr;</h1>
-      </a>
+      <button className="w-96 rounded-lg py-6 border hover:text-blue-600 hover:bg-gray-100 bg-gray-50">
+        <Link href={'/folder/' + id} >
+          <h1 className="text-2xl font-bold">{title} &rarr;</h1>
+        </Link>
+      </button>
     </>
   );
 };
