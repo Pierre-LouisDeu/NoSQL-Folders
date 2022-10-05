@@ -12,19 +12,6 @@ type ContactListProps = {
 
 const FolderGrid: React.FunctionComponent<ContactListProps> = ({ parent }) => {
   const [folders, isPending, error] = useFetch(parent);
-//   const [folders, setFolders] = useState([{}]);
-//   useEffect(() => {
-//     const unsubscribe = firebase.db
-//       .collection("folders")
-//       .onSnapshot((snapshot) => {
-//         const foldersName = snapshot.docs.map((doc) => ({
-//           id: doc.id,
-//           ...doc.data(),
-//         }));
-//         setFolders(foldersName);
-//       });
-//     return () => unsubscribe();
-//   }, [parent]);
   return (
     <>
       <div className="mt-2 w-full">
@@ -35,7 +22,7 @@ const FolderGrid: React.FunctionComponent<ContactListProps> = ({ parent }) => {
         )}
         {isPending && <div>Loading...</div>}
         {folders &&
-          folders.map((folder: any, i : number) => (
+          folders.map((folder: any, i: number) => (
             <div className="py-4" key={i}>
               <Folder title={folder.title} id={folder.id} />
             </div>

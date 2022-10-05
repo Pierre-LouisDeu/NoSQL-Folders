@@ -2,36 +2,18 @@ import { useState, useEffect, useContext } from "react";
 import firebase from "../firebase/initFirebase";
 import "firebase/compat/firestore";
 
-// useEffect(() => {
-  // fetch(url)
-  //   .then((res) => {
-  //     if (!res.ok) {
-  //       throw Error('Could not fetch the data for that resource');
-  //     }
-  //     return res.json();
-  //   })
-  //   .then((data) => {
-  //     setData(data);
-  //     setIsPending(false);
-  //     setError(null);
-  //   })
-  //   .catch((err) => {
-  //     setIsPending(false);
-  //     setError(err.message);
-  //   });
-// }, [url]);
-
 const useFetch = (parent: string | boolean): Array<any> => {
   const [folders, setFolders] = useState([{}]);
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(null);
 
+  const query = firebase.db.collection("folders").where("parent", "==", parent);
+
   useEffect(() => {
-   const unsubscribe = firebase.db
-      .collection("folders")
-      .where("parent", "==", parent)
-      .onSnapshot((snapshot) => {
-        const foldersName = snapshot.docs.map((doc) => ({
+    query
+      .get()
+      .then((data) => {
+        const foldersName = data.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
@@ -39,7 +21,10 @@ const useFetch = (parent: string | boolean): Array<any> => {
         setError(null);
         setFolders(foldersName);
       })
-    return () => unsubscribe();
+      .catch((error: any) => {
+        setIsPending(false);
+        setError(error.message);
+      });
   }, [parent]);
 
   return [folders, isPending, error];
