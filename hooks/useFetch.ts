@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import firebase from "../firebase/initFirebase";
 import "firebase/compat/firestore";
 
-const useFetch = (parent: string | boolean): Array<any> => {
+const useFetch = (parent: string | string[] | boolean | undefined): Array<any> => {
   const [folders, setFolders] = useState([{}]);
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(null);

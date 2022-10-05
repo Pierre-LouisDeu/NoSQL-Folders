@@ -7,7 +7,7 @@ import firebase from "../../../firebase/initFirebase";
 import "firebase/compat/firestore";
 
 type ContactListProps = {
-  parent: string | boolean;
+  parent: string | string[] | boolean | undefined;
 };
 
 const FolderGrid: React.FunctionComponent<ContactListProps> = ({ parent }) => {
