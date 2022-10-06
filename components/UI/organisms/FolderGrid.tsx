@@ -5,6 +5,7 @@ import Folder from "../molecules/Folder";
 import Banner from "../molecules/Banner";
 import firebase from "../../../firebase/initFirebase";
 import "firebase/compat/firestore";
+import DropdownMenu from "../molecules/DropdownMenu";
 
 type ContactListProps = {
   parent: string | string[] | boolean | undefined;
@@ -24,7 +25,11 @@ const FolderGrid: React.FunctionComponent<ContactListProps> = ({ parent }) => {
         {folders &&
           folders.map((folder: any, i: number) => (
             <div key={i}>
-              <Folder title={folder.title} id={folder.id} />
+              <DropdownMenu
+                children={Folder}
+                title={folder.title} 
+                id={folder.id}
+              />
             </div>
           ))}
       </div>

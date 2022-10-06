@@ -13,7 +13,7 @@ const AddButton: React.FunctionComponent = () => {
 
   return (
     <>
-      <Button title="+ Add" action={addAction} color="green" />
+      <Button title="+" action={addAction} color="indigo" />
     </>
   );
 };

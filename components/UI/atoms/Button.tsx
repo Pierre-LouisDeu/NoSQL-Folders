@@ -16,11 +16,12 @@ type colorsType = {
 
 const colors: colorsType = {
   indigo:
-    "bg-indigo-100 hover:bg-indigo-200 text-indigo-700 hover:text-black focus:ring-indigo-500",
-  red: "bg-red-100 hover:bg-red-200 text-red-700 hover:text-black focus:ring-red-500",
-  gray: "bg-gray-100 hover:bg-gray-200 text-gray-700 hover:text-black focus:ring-gray-500",
+    "bg-indigo-100/30 hover:bg-indigo-200/30 text-indigo-700 hover:text-indigo-900 focus:ring-indigo-500",
+  blue: "bg-blue-100/30 hover:bg-blue-200/30 text-blue-700 hover:text-black focus:ring-blue-500",
+  red: "bg-red-100/30 hover:bg-red-200/30 text-red-700 hover:text-black focus:ring-red-500",
+  gray: "bg-gray-100/30 hover:bg-gray-200/30 text-gray-700 hover:text-black focus:ring-gray-500",
   green:
-    "bg-green-100 hover:bg-green-200 text-green-700 hover:text-black focus:ring-green-500",
+    "bg-green-100/30 hover:bg-green-200/30 text-green-700 hover:text-black focus:ring-green-500",
 };
 
 const Button: React.FunctionComponent<ButtonProps> = ({
@@ -34,7 +35,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({
     <>
       <button
         type="button"
-        className={`items-center rounded-lg border border-transparent ${colorClasses} px-6 py-3 text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 w-48 py-8 px-10`}
+        className={`items-center shadow-xl hover:shadow-indigo-300/30 rounded-full rounded-lg border border-transparent ${colorClasses} px-6 py-3 text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 w-36 py-6 px-10`}
         onClick={action}
       >
         {title}
