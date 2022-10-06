@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import FolderGrid from "../UI/organisms/FolderGrid";
+import GoBackButton from "../UI/molecules/GoBackButton";
 
 type ContactListProps = {
   parent: string | string[] | boolean | undefined;
@@ -24,6 +25,7 @@ const Finder: React.FunctionComponent<ContactListProps> = ({ parent }) => {
         </p>
 
         <div className="mt-6 flex max-w-4xl flex-wrap items-center justify-around sm:w-full">
+          <GoBackButton />
           <FolderGrid parent={parent} />
         </div>
       </main>

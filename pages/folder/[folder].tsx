@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import Finder from "../../components/templates/Finder";
 import Image from "next/image";
-import { ParentsContext } from "../../contexts/parentsContext";
+import { ParentsContext } from "../../contexts/ParentsContext";
 
 const Home: NextPage = () => {
   const router = useRouter();
