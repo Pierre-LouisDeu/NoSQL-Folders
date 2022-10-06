@@ -25,10 +25,14 @@ const Finder: React.FunctionComponent<ContactListProps> = ({ parent }) => {
           </code>
         </p>
 
-        <div className="mt-6 flex max-w-4xl flex-wrap items-center justify-around sm:w-full">
-          {parent && <GoBackButton />}
-          <AddButton />
-          <FolderGrid parent={parent} />
+        <div className="mt-6 flex-wrap items-center justify-around px-24 flex flex-col">
+          <div className="py-6 flex flex-row">
+            <div className="mr-8">{parent && <GoBackButton />}</div>
+            <AddButton />
+          </div>
+          <div className="py-6 border border-2 border-dashed rounded-lg px-6 h-96 w-full">
+            <FolderGrid parent={parent} />
+          </div>
         </div>
       </main>
     </>

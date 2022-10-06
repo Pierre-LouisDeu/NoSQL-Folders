@@ -34,7 +34,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({
     <>
       <button
         type="button"
-        className={`items-center rounded-lg border border-transparent ${colorClasses} px-6 py-3 text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 w-96 py-8 px-10`}
+        className={`items-center rounded-lg border border-transparent ${colorClasses} px-6 py-3 text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 w-48 py-8 px-10`}
         onClick={action}
       >
         {title}

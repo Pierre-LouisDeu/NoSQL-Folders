@@ -15,7 +15,7 @@ const GoBackButton: React.FunctionComponent = () => {
 
   return (
     <>
-      <Button title="&larr; Go Back" action={goBackAction} color="indigo" />
+      <Button title="&larr;" action={goBackAction} color="indigo" />
     </>
   );
 };
