@@ -17,7 +17,7 @@ const Folder: React.FunctionComponent<FolderProps> = ({ title, id }) => {
           parents ? setParents(parents + "_" + id) : setParents(id);
         }}
       >
-        <h1 className="text-2xl font-bold">{title} &rarr;</h1>
+        <h1 className="text-2xl font-bold">{title}</h1>
       </button>
     </>
   );
