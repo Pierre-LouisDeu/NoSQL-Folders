@@ -6,14 +6,11 @@ import cutLastId from "../../../utils/cutLastId";
 const GoBackButton: React.FunctionComponent = () => {
   const { parents, setParents } = useContext(ParentsContext);
 
-  
-
   const newAction = () => {
-    if (parents) {
+    // if (parents) {
       const newParents = cutLastId(parents);
-      console.log({newParents});
       setParents(newParents);
-    }
+    // }
   };
 
   return (

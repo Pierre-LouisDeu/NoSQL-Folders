@@ -25,7 +25,7 @@ const Finder: React.FunctionComponent<ContactListProps> = ({ parent }) => {
         </p>
 
         <div className="mt-6 flex max-w-4xl flex-wrap items-center justify-around sm:w-full">
-          <GoBackButton />
+          {parent && <GoBackButton />}
           <FolderGrid parent={parent} />
         </div>
       </main>
