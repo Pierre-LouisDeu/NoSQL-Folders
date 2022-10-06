@@ -30,7 +30,7 @@ const Finder: React.FunctionComponent<ContactListProps> = ({ parent }) => {
             <div className="mr-8">{parent && <GoBackButton />}</div>
             <AddButton />
           </div>
-          <div className="py-6 border border-2 border-dashed rounded-lg px-6 h-96 w-full">
+          <div className="py-6 rounded-lg px-6 h-96 w-full">
             <FolderGrid parent={parent} />
           </div>
         </div>

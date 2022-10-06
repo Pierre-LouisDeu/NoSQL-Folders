@@ -20,7 +20,7 @@ const FolderGrid: React.FunctionComponent<ContactListProps> = ({ parent }) => {
         </div>
       )}
       {isPending && <div>Loading...</div>}
-      <div className="w-full grid md:grid-cols-4 gap-6">
+      <div className="w-full grid md:grid-cols-4 gap-12">
         {folders &&
           folders.map((folder: any, i: number) => (
             <div key={i}>

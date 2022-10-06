@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import Link from "next/link";
 import { ParentsContext } from "../../../contexts/ParentsContext";
+import FolderIcon from "../atoms/FolderIcon";
 
 type FolderProps = {
   title: string;
@@ -11,14 +12,15 @@ const Folder: React.FunctionComponent<FolderProps> = ({ title, id }) => {
   const { parents, setParents } = useContext(ParentsContext);
   return (
     <>
-      <div className="w-48 rounded-lg hover:text-blue-600 hover:bg-gray-100 bg-gray-50">
+      <div className="w-48 rounded-xl hover:text-black text-gray-800 hover:bg-gray-50 justify-center">
         <button
-          className="w-full"
+          className="w-full px-6"
           onClick={() => {
             parents ? setParents(parents + "_" + id) : setParents(id);
           }}
         >
-          <h1 className="text-2xl font-bold my-8">{title}</h1>
+          <FolderIcon className="h-36 w-36" />
+          <h1 className="text-xl my-6">{title}</h1>
         </button>
       </div>
     </>
