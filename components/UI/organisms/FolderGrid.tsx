@@ -27,6 +27,7 @@ const FolderGrid: React.FunctionComponent<ContactListProps> = ({ parent }) => {
             <div key={i}>
               <DropdownMenu
                 children={Folder}
+                parent={parent}
                 title={folder.title} 
                 id={folder.id}
               />

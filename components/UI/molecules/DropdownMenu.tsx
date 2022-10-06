@@ -9,12 +9,17 @@ import {
   TrashIcon,
   UserPlusIcon,
 } from "@heroicons/react/20/solid";
+import useDelete from "../../../hooks/useDelete";
+
+
 
 const DropdownMenu: React.FunctionComponent<any> = ({
   children: Children,
   title,
   id,
+  parent,
 }) => {
+  const { deleteFolder } = useDelete();
   return (
     <>
       <ContextMenu.Root>
@@ -35,6 +40,7 @@ const DropdownMenu: React.FunctionComponent<any> = ({
               "focus:bg-neutral-400/30",
               "dark:focus:bg-neutral-700"
             )}
+            onClick={() => {console.log({id})}}
           >
             <DocumentDuplicateIcon
               className="mr-3 h-5 w-5 text-gray-600 group-hover:text-gray-500"
@@ -100,6 +106,7 @@ const DropdownMenu: React.FunctionComponent<any> = ({
               "flex items-center w-full px-3 h-8 flex-shrink-0 text-sm text-left cursor-base focus:outline-none",
               "focus:bg-neutral-400/30 dark:focus:bg-neutral-700"
             )}
+            onClick={() => deleteFolder(parent, id)}
           >
             <TrashIcon
               className="mr-3 h-5 w-5 text-gray-600 group-hover:text-gray-500"
