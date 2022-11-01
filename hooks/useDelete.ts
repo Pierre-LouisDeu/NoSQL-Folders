@@ -3,7 +3,7 @@ import firebase from "../firebase/initFirebase";
 import "firebase/compat/firestore";
 import { ReloadContext } from "../contexts/ReloadContext";
 
-type parentType = {
+type ParentType = {
   parent: string | string[] | boolean | undefined;
 };
 
@@ -11,7 +11,7 @@ const useDelete = () => {
   const { setReload } = useContext(ReloadContext);
 
   // Delete all documents in the collection folders that contains the parent id in the parent field
-  const deleteFolder = async (parent : parentType, id: string) => {
+  const deleteFolder = async (parent : ParentType, id: string) => {
     const key = parent + '_' + id
     const query = await firebase.db
       .collection("folders")
