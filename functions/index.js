@@ -25,21 +25,17 @@ const findTreeDepth = (data) => {
 
 /// Cloud Functions
 
-const algoliaSave = (data, objectID, snapshot) => {
-  const level = findTreeDepth(data);
-  snapshot.ref.set({ level }, { merge: true });
-  foldersIndex.saveObject({
-    ...data,
-    objectID,
-  });
-};
-
 exports.addToIndex = functions.firestore
   .document("folders/{folderID}")
   .onCreate((snapshot) => {
     const data = snapshot.data();
     const objectID = snapshot.id;
-    return algoliaSave(data, objectID, snapshot);
+    const level = findTreeDepth(data);
+    snapshot.ref.set({ level }, { merge: true });
+    return oldersIndex.saveObject({
+      ...newData,
+      objectID,
+    });
   });
 
 exports.updateIndex = functions.firestore
@@ -47,7 +43,10 @@ exports.updateIndex = functions.firestore
   .onUpdate((change) => {
     const newData = change.after.data();
     const objectID = change.after.id;
-    return algoliaSave(newData, objectID, snapshot);
+    return foldersIndex.saveObject({
+      ...newData,
+      objectID,
+    });
   });
 
 exports.deleteFromIndex = functions.firestore
