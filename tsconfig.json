@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/UI/molecules/Folder.js", "components/UI/molecules/DropdownMenu.js", "components/UI/organisms/FolderGrid.js", "components/UI/molecules/Folder.js", "hooks/useFetch.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/UI/molecules/Folder.js", "components/UI/molecules/DropdownMenu.js", "components/UI/organisms/FolderGrid.js", "components/UI/molecules/Folder.js", "hooks/useFetch.js", "functions/index.js"],
   "exclude": ["node_modules"]
 }
