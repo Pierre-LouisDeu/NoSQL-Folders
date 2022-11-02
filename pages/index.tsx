@@ -14,7 +14,7 @@ const Home: NextPage = () => {
     <VechaiProvider>
       <ReloadContext.Provider value={{ reload, setReload }}>
         <ParentsContext.Provider value={{ parents, setParents }}>
-          <div className="flex min-h-screen flex-col items-center py-2 ">
+          <div className="flex min-h-screen flex-col items-center  py-2 ">
             <Head>
               <title>Create Next App</title>
               <link rel="icon" href="/favicon.ico" />
