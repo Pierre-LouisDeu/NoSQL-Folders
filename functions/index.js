@@ -32,7 +32,7 @@ exports.addToIndex = functions.firestore
     const objectID = snapshot.id;
     const level = findTreeDepth(data);
     snapshot.ref.set({ level }, { merge: true });
-    return oldersIndex.saveObject({
+    return foldersIndex.saveObject({
       ...newData,
       objectID,
     });
@@ -51,4 +51,42 @@ exports.updateIndex = functions.firestore
 
 exports.deleteFromIndex = functions.firestore
   .document("folders/{folderID}")
-  .onDelete((snapshot) => foldersIndex.deleteObject(snapshot.id));
+  .onDelete((snapshot) => {
+    foldersIndex.deleteObject(snapshot.id);
+  });
+
+// exports an https function wich returns all the algolia folders when called
+exports.getFolders = functions.https.onRequest((req, res) => {
+  foldersIndex
+    .search("")
+    .then(({ hits }) => {
+      res.send(hits);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send(err);
+    });
+});
+
+exports.deleteSubFolders = functions.https.onRequest(async (req, res) => {
+  const id = req.query.id;
+  // Check if id is a string and if its lentgh is equal to 20
+  if (typeof id === "string" && id.length === 20) {
+    const query = await foldersIndex.search(id);
+
+    if (query.hits.length > 0) {
+      try {
+        await query.hits.map((hit) => {
+          admin.firestore().collection("folders").doc(hit.objectID).delete();
+        });
+        res.json({ message: "Folders deleted", query: query });
+      } catch {
+        res
+          .status(500)
+          .send({ message: "Error deleting folder", query: query });
+      }
+    }
+  } else {
+    res.status(400).send("Invalid id");
+  }
+});
