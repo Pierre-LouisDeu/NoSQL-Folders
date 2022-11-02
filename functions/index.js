@@ -79,11 +79,11 @@ exports.deleteSubFolders = functions.https.onRequest(async (req, res) => {
         await query.hits.map((hit) => {
           admin.firestore().collection("folders").doc(hit.objectID).delete();
         });
-        res.json({ message: "Folders deleted", query: query });
+        res.json({ message: "Folders deleted"});
       } catch {
         res
           .status(500)
-          .send({ message: "Error deleting folder", query: query });
+          .send({ message: "Could not delete the folders and files"});
       }
     }
   } else {

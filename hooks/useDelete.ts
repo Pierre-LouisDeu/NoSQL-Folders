@@ -11,20 +11,20 @@ const useDelete = () => {
   const { setReload } = useContext(ReloadContext);
 
   // Delete all documents in the collection folders that contains the parent id in the parent field
-  const deleteFolder = async (parent : ParentType, id: string) => {
-    const key = parent + '_' + id
-    const query = await firebase.db
-      .collection("folders")
-      .where("parent", ">=", key)
-      .where("parent", "<=", `${key}_`) 
-      .get();
-    query.forEach((doc) => {
-      doc.ref.delete();
-    const title = doc.data().title;
-    console.log('delete :',doc.id, {title});
-    });
-    await firebase.db.collection("folders").doc(id).delete();
-    setReload(true);
+  const deleteFolder = async (parent: ParentType, id: string) => {
+    try {
+      // Delete the folder (firestore request)
+      await firebase.db.collection("folders").doc(id).delete();
+      // Delete the subfolders (backend request)
+      setReload(true);
+      const res = await fetch(
+        `https://us-central1-nosql-folders.cloudfunctions.net/deleteSubFolders?id=${id}`
+      );
+      const data = await res.json();
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return { deleteFolder };
