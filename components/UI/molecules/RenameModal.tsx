@@ -29,11 +29,16 @@ const RenameModal: React.FunctionComponent<RenameModalProps> = ({
 
   const rename = () => {
     if (renameFolderState?.id) {
-      console.log({ renameFolderState, title });
       renameFolder(renameFolderState.id, title);
       setOpen(false);
     } else {
       console.log("Error while renaming folder");
+    }
+  };
+
+  const handleKeyPress = (event: any) => {
+    if (event.key === "Enter") {
+      rename()
     }
   };
 
@@ -90,11 +95,13 @@ const RenameModal: React.FunctionComponent<RenameModalProps> = ({
                       className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       placeholder="New name"
                       onChange={(e) => setTitle(e.target.value)}
+                      onKeyPress={handleKeyPress}
                     />
                   </div>
                   <button
                     className="mt-3 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                     onClick={() => rename()}
+                    // call rename when user press enter
                   >
                     Save
                   </button>

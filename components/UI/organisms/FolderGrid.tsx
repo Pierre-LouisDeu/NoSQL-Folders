@@ -19,9 +19,9 @@ const FolderGrid: React.FunctionComponent<ContactListProps> = ({ parent }) => {
     show: false,
   });
 
-  useEffect(() => {
-    console.log({ renameFolderState });
-  }, [renameFolderState]);
+  // useEffect(() => {
+  //   console.log({ renameFolderState });
+  // }, [renameFolderState]);
 
   return (
     <>
