@@ -20,7 +20,6 @@ const RenameModal: React.FunctionComponent<RenameModalProps> = ({
   const [open, setOpen] = useState(true);
   const [title, setTitle] = useState("");
   const { renameFolder } = usePatch();
-  const inputRef = useRef(null);
 
   useEffect(() => {
     if (!open) {
@@ -29,7 +28,7 @@ const RenameModal: React.FunctionComponent<RenameModalProps> = ({
   }, [open]);
 
   const rename = () => {
-    if (renameFolderState?.id) {
+    if (renameFolderState?.id && title.length > 0) {
       renameFolder(renameFolderState.id, title);
       setOpen(false);
     } else {
@@ -92,7 +91,6 @@ const RenameModal: React.FunctionComponent<RenameModalProps> = ({
                       Name
                     </label>
                     <input
-                      ref={inputRef}
                       type="text"
                       className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       placeholder="New name"
