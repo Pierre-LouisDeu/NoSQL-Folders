@@ -3,27 +3,21 @@ import firebase from "../firebase/initFirebase";
 import "firebase/compat/firestore";
 import { ReloadContext } from "../contexts/ReloadContext";
 
-type parentType = {
-  parent: string | string[] | boolean | undefined;
-};
-
-const usePost = () => {
+const usePost = (id: string, newName: string) => {
   const { setReload } = useContext(ReloadContext);
-  const postNewFolder = async (parent: parentType) => {
-    const newFolder = {
-      title: "New Folder",
-      parent: parent,
-      //   createdAt: firebase.timestamp(),
-    };
+  const renameFolder = async () => {
     try {
-      await firebase.db.collection("folders").add(newFolder);
+      await firebase.db
+        .collection("folders")
+        .doc(id)
+        .update({ title: newName });
       setReload(true);
     } catch (err) {
       console.log(err);
     }
   };
 
-  return { postNewFolder };
+  return { renameFolder };
 };
 
 export default usePost;
