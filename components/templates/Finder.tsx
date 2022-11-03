@@ -23,12 +23,12 @@ const Finder: React.FunctionComponent<ContactListProps> = ({ parent }) => {
           <div className="py-8 flex flex-row">
             <GoBackButton active={parent ? true : false} />
             <div className="px-8">
-              <SearchButton search={search} setSearch={setSearch}/>
+              <SearchButton search={search} setSearch={setSearch} />
             </div>
             <AddButton />
           </div>
-          <div className="py-6 rounded-lg px-6 h-96 w-full">
-            <FolderGrid parent={parent} query={queryFinder} />
+          <div className="py-6 rounded-lg px-6 min-h-96 w-full">
+            <FolderGrid query={queryFinder} />
             {search.show ? <SearchModal search={search} setSearch={setSearch} query={querySearchTool}/> : null}
           </div>
         </div>

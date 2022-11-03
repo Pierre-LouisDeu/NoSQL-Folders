@@ -1,6 +1,7 @@
 import { Fragment, useState, useEffect, useRef, MutableRefObject } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import SearchBar from "../molecules/SearchBar";
+import FolderGrid from "../organisms/FolderGrid";
 
 type SearchModalStateProps = {
   show: boolean;
@@ -52,19 +53,17 @@ const SearchModal: React.FunctionComponent<SearchModalProps> = ({
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative w-1/2 transform overflow-hidden rounded-lg backdrop-blur-lg bg-white pb-4 shadow-xl transition-all">
+              <Dialog.Panel className="relative w-1/2 transform overflow-hidden rounded-lg backdrop-blur-lg bg-white pb-4 shadow-xl transition-all mt-8 mb-8">
                 <SearchBar setSearch={setSearch} search={search} />
                 <div className="text-center border-t border-1">
                   <Dialog.Title
                     as="h3"
-                    className="text-lg text-left pl-8 pt-6 font-medium leading-6 text-gray-900"
+                    className="text-lg text-left pl-8 pt-6 font-medium leading-6 text-gray-900 font-semibold"
                   >
-                    Results
+                    Folders
                   </Dialog.Title>
-                  <div className="mt-2 h-96">
-                    <p className="text-sm text-left pl-8 text-gray-500">
-                      {search.text}
-                    </p>
+                  <div className="pt-2">
+                    <FolderGrid query={query} setOpen={setOpen} />
                   </div>
                 </div>
               </Dialog.Panel>

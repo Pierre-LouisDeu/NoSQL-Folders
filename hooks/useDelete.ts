@@ -11,7 +11,7 @@ const useDelete = () => {
   const { setReload } = useContext(ReloadContext);
 
   // Delete all documents in the collection folders that contains the parent id in the parent field
-  const deleteFolder = async (parent: ParentType, id: string) => {
+  const deleteFolder = async (id: string) => {
     try {
       // Delete the folder (firestore request)
       await firebase.db.collection("folders").doc(id).delete();
