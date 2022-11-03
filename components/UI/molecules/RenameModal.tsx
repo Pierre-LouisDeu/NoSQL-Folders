@@ -1,4 +1,4 @@
-import { Fragment, useState, useEffect } from "react";
+import { Fragment, useState, useEffect, useRef, MutableRefObject } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { CheckIcon } from "@heroicons/react/24/outline";
 import usePatch from "../../../hooks/usePatch";
@@ -20,12 +20,13 @@ const RenameModal: React.FunctionComponent<RenameModalProps> = ({
   const [open, setOpen] = useState(true);
   const [title, setTitle] = useState("");
   const { renameFolder } = usePatch();
+  const inputRef = useRef(null);
 
   useEffect(() => {
     if (!open) {
       setRenameFolderState({ show: false, id: "" });
     }
-  }, [renameFolderState]);
+  }, [open]);
 
   const rename = () => {
     if (renameFolderState?.id) {
@@ -38,7 +39,7 @@ const RenameModal: React.FunctionComponent<RenameModalProps> = ({
 
   const handleKeyPress = (event: any) => {
     if (event.key === "Enter") {
-      rename()
+      rename();
     }
   };
 
@@ -91,6 +92,7 @@ const RenameModal: React.FunctionComponent<RenameModalProps> = ({
                       Name
                     </label>
                     <input
+                      ref={inputRef}
                       type="text"
                       className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       placeholder="New name"
@@ -101,7 +103,6 @@ const RenameModal: React.FunctionComponent<RenameModalProps> = ({
                   <button
                     className="mt-3 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                     onClick={() => rename()}
-                    // call rename when user press enter
                   >
                     Save
                   </button>

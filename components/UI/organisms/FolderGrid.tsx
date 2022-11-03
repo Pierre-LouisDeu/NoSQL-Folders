@@ -20,7 +20,7 @@ const FolderGrid: React.FunctionComponent<ContactListProps> = ({ parent }) => {
   });
 
   // useEffect(() => {
-  //   console.log({ renameFolderState });
+  //   console.log(renameFolderState.show ? "open" : "closed");
   // }, [renameFolderState]);
 
   return (
