@@ -4,20 +4,18 @@ import "firebase/compat/firestore";
 import { ReloadContext } from "../contexts/ReloadContext";
 
 const useFetch = (
-  parent: string | string[] | boolean | undefined
+  query: any
 ): Array<any> => {
   const { reload, setReload } = useContext(ReloadContext);
   const [folders, setFolders] = useState([{}]);
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(null);
 
-  const query = firebase.db.collection("folders").where("parent", "==", parent);
-
   useEffect(() => {
     query
       .get()
-      .then((data) => {
-        const foldersName = data.docs.map((doc) => ({
+      .then((data : any) => {
+        const foldersName = data.docs.map((doc : any) => ({
           id: doc.id,
           ...doc.data(),
         }));
@@ -29,7 +27,7 @@ const useFetch = (
       .catch((error: any) => {
         setError(error.message);
       });
-  }, [parent, reload]);
+  }, [query, reload]);
 
   return [folders, isPending, error];
 };

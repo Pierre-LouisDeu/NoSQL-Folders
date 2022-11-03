@@ -10,10 +10,11 @@ import RenameModal from "../molecules/RenameModal";
 
 type ContactListProps = {
   parent: string | string[] | boolean | undefined;
+  query: any;
 };
 
-const FolderGrid: React.FunctionComponent<ContactListProps> = ({ parent }) => {
-  const [folders, isPending, error] = useFetch(parent);
+const FolderGrid: React.FunctionComponent<ContactListProps> = ({ parent, query }) => {
+  const [folders, isPending, error] = useFetch(query);
   const [renameFolderState, setRenameFolderState] = useState({
     id: "",
     show: false,
