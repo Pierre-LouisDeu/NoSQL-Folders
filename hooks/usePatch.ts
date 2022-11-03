@@ -3,9 +3,9 @@ import firebase from "../firebase/initFirebase";
 import "firebase/compat/firestore";
 import { ReloadContext } from "../contexts/ReloadContext";
 
-const usePost = (id: string, newName: string) => {
+const usePost = () => {
   const { setReload } = useContext(ReloadContext);
-  const renameFolder = async () => {
+  const renameFolder = async (id: string, newName: string) => {
     try {
       await firebase.db
         .collection("folders")
