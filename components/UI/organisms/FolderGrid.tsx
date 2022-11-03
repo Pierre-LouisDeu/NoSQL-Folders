@@ -6,6 +6,7 @@ import Banner from "../molecules/Banner";
 import firebase from "../../../firebase/initFirebase";
 import "firebase/compat/firestore";
 import DropdownMenu from "../molecules/DropdownMenu";
+import RenameModal from "../molecules/RenameModal";
 
 type ContactListProps = {
   parent: string | string[] | boolean | undefined;
@@ -13,13 +14,15 @@ type ContactListProps = {
 
 const FolderGrid: React.FunctionComponent<ContactListProps> = ({ parent }) => {
   const [folders, isPending, error] = useFetch(parent);
+  const [renameModal, setRenameModal] = useState(true);
   return (
     <>
-      {error && (
-        <div>
+      {renameModal ? (
+          <RenameModal setRenameModal={setRenameModal}/>
+      ) : null}
+      {error ? (
           <Banner title={error} />
-        </div>
-      )}
+      ) : null}
       {isPending && <div>Loading...</div>}
       <div className="w-full grid md:grid-cols-4 gap-12">
         {folders &&
@@ -28,8 +31,9 @@ const FolderGrid: React.FunctionComponent<ContactListProps> = ({ parent }) => {
               <DropdownMenu
                 children={Folder}
                 parent={parent}
-                title={folder.title} 
+                title={folder.title}
                 id={folder.id}
+                setRenameModal={setRenameModal}
               />
             </div>
           ))}
