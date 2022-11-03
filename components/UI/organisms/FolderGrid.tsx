@@ -14,15 +14,24 @@ type ContactListProps = {
 
 const FolderGrid: React.FunctionComponent<ContactListProps> = ({ parent }) => {
   const [folders, isPending, error] = useFetch(parent);
-  const [renameModal, setRenameModal] = useState(true);
+  const [renameFolderState, setRenameFolderState] = useState({
+    id: "",
+    show: false,
+  });
+
+  useEffect(() => {
+    console.log({ renameFolderState });
+  }, [renameFolderState]);
+
   return (
     <>
-      {renameModal ? (
-          <RenameModal setRenameModal={setRenameModal}/>
+      {renameFolderState?.show ? (
+        <RenameModal
+          setRenameFolderState={setRenameFolderState}
+          renameFolderState={renameFolderState}
+        />
       ) : null}
-      {error ? (
-          <Banner title={error} />
-      ) : null}
+      {error ? <Banner title={error} /> : null}
       {isPending && <div>Loading...</div>}
       <div className="w-full grid md:grid-cols-4 gap-12">
         {folders &&
@@ -33,7 +42,7 @@ const FolderGrid: React.FunctionComponent<ContactListProps> = ({ parent }) => {
                 parent={parent}
                 title={folder.title}
                 id={folder.id}
-                setRenameModal={setRenameModal}
+                setRenameFolderState={setRenameFolderState}
               />
             </div>
           ))}

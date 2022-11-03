@@ -3,7 +3,7 @@ import firebase from "../firebase/initFirebase";
 import "firebase/compat/firestore";
 import { ReloadContext } from "../contexts/ReloadContext";
 
-const usePost = () => {
+const usePatch = () => {
   const { setReload } = useContext(ReloadContext);
   const renameFolder = async (id: string, newName: string) => {
     try {
@@ -20,4 +20,4 @@ const usePost = () => {
   return { renameFolder };
 };
 
-export default usePost;
+export default usePatch;
