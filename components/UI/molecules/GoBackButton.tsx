@@ -3,7 +3,11 @@ import { ParentsContext } from "../../../contexts/ParentsContext";
 import Button from "../atoms/Button";
 import cutLastId from "../../../utils/cutLastId";
 
-const GoBackButton: React.FunctionComponent = () => {
+type GoBackButtonProps = {
+  active: boolean;
+};
+
+const GoBackButton: React.FunctionComponent<GoBackButtonProps> = ({active}) => {
   const { parents, setParents } = useContext(ParentsContext);
 
   const goBackAction = () => {
@@ -15,7 +19,7 @@ const GoBackButton: React.FunctionComponent = () => {
 
   return (
     <>
-      <Button title="&larr;" action={goBackAction} color="indigo" />
+      <Button title="&larr;" action={goBackAction} color={active ? "indigo" : "gray"} />
     </>
   );
 };

@@ -7,13 +7,11 @@ import firebase from "../../../firebase/initFirebase";
 import "firebase/compat/firestore";
 import DropdownMenu from "../molecules/DropdownMenu";
 import RenameModal from "../molecules/RenameModal";
+import { ParentsContext } from "../../../contexts/ParentsContext";
 
-type ContactListProps = {
-  parent: string | string[] | boolean | undefined;
-};
-
-const FolderGrid: React.FunctionComponent<ContactListProps> = ({ parent }) => {
-  const [folders, isPending, error] = useFetch(parent);
+const FolderGrid: React.FunctionComponent<any> = ({ query, setOpen }) => {
+  const { setParents, parents } = useContext(ParentsContext);
+  const [folders, isPending, error] = useFetch(query);
   const [renameFolderState, setRenameFolderState] = useState({
     id: "",
     show: false,
@@ -39,7 +37,6 @@ const FolderGrid: React.FunctionComponent<ContactListProps> = ({ parent }) => {
             <div key={i}>
               <DropdownMenu
                 children={Folder}
-                parent={parent}
                 title={folder.title}
                 id={folder.id}
                 setRenameFolderState={setRenameFolderState}
