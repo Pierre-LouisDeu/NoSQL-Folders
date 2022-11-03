@@ -15,8 +15,12 @@ const usePost = () => {
       parent: parent,
       //   createdAt: firebase.timestamp(),
     };
-    await firebase.db.collection("folders").add(newFolder);
-    setReload(true);
+    try {
+      await firebase.db.collection("folders").add(newFolder);
+      setReload(true);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return { postNewFolder };

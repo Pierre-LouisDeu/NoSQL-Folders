@@ -6,6 +6,7 @@ import Banner from "../molecules/Banner";
 import firebase from "../../../firebase/initFirebase";
 import "firebase/compat/firestore";
 import DropdownMenu from "../molecules/DropdownMenu";
+import RenameModal from "../molecules/RenameModal";
 
 type ContactListProps = {
   parent: string | string[] | boolean | undefined;
@@ -13,13 +14,24 @@ type ContactListProps = {
 
 const FolderGrid: React.FunctionComponent<ContactListProps> = ({ parent }) => {
   const [folders, isPending, error] = useFetch(parent);
+  const [renameFolderState, setRenameFolderState] = useState({
+    id: "",
+    show: false,
+  });
+
+  // useEffect(() => {
+  //   console.log(renameFolderState.show ? "open" : "closed");
+  // }, [renameFolderState]);
+
   return (
     <>
-      {error && (
-        <div>
-          <Banner title={error} />
-        </div>
-      )}
+      {renameFolderState?.show ? (
+        <RenameModal
+          setRenameFolderState={setRenameFolderState}
+          renameFolderState={renameFolderState}
+        />
+      ) : null}
+      {error ? <Banner title={error} /> : null}
       {isPending && <div>Loading...</div>}
       <div className="w-full grid md:grid-cols-4 gap-12">
         {folders &&
@@ -28,8 +40,9 @@ const FolderGrid: React.FunctionComponent<ContactListProps> = ({ parent }) => {
               <DropdownMenu
                 children={Folder}
                 parent={parent}
-                title={folder.title} 
+                title={folder.title}
                 id={folder.id}
+                setRenameFolderState={setRenameFolderState}
               />
             </div>
           ))}
