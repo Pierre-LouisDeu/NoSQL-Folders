@@ -26,6 +26,7 @@ const useFetch = (
       })
       .catch((error: any) => {
         setError(error.message);
+        setIsPending(false);
       });
   }, [query, reload]);
 
